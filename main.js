@@ -20,8 +20,10 @@ class Todo {
   }
 
   removeItem(id) {
-    const index = this.list.findIndex(item => {
-      item.id === id;
+    const index = this.list.findIndex((item, i)=> {
+      if (item.id === id) {
+        return i;
+      }
     });
     if (!index) {
       return false;
