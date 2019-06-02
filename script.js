@@ -14,8 +14,8 @@ class Todo{
     console.log(this.todoList);
   }
   removeItem(id){
+    const result = this.todoList.some(item => item.id === id);
     this.todoList = this.todoList.filter(item => item.id !== id);
-    const result = this.todoList.some(item => item.id == id);
     console.log(result);
   }
   getItem(id){
