@@ -1,11 +1,11 @@
 class Todo {
   constructor() {
-    this.id = 0;
+    this.lastId = 0;
     this.list = [];
   }
 
   addItem(title, priority) {
-    const task = {id: this.id++, title, priority};
+    const task = { id: this.lastId++, title, priority };
     this.list.push(task);
     return task.id;
   }
@@ -20,15 +20,15 @@ class Todo {
 
   next() {
     return this.list.reduce((acc, item) => {
-      if(item.priority < acc.priority) {
-        acc = item;
+      if (item.priority < acc.priority) {
+        return item;
       }
       return acc;
     })
   }
 }
 
-function getRandomNum () {
+function getRandomNum() {
   return Math.floor(1 + Math.random() * 10);
 }
 
