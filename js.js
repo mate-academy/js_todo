@@ -26,9 +26,7 @@ class Todo {
 
     getItem(id) {
         let foundObj = this.list.find(newObj => newObj.id === id);
-        if (!foundObj) {
-            return null;
-        } return foundObj;
+        return foundObj || null;
     }
 
     next() {
