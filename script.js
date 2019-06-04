@@ -11,7 +11,9 @@ class Todo {
   }
 
   removeItem(id) {
-    return (this.list.splice(this.list.findIndex(item => item.id === id), 1)).length > 0 ? true : false;
+    const removeIndex = this.list.findIndex(item => item.id === id)
+    const removed = this.list.splice(removeIndex, 1)
+    return removed.length > 0 ? true : false;
   }
 
   getItem(id) {
