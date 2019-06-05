@@ -1,17 +1,17 @@
 class Todo {
     constructor() {
         this.todos = [];
-        this.startId = 1;
+        this.nextId = 1;
     }
 
     addItem(title, priority) {
         const task = {
-            id: this.startId,
+            id: this.nextId,
             title,
             priority
         };
         this.todos.push(task);
-        this.startId += 1;
+        this.nextId += 1;
         return task.id;
     }
 
@@ -22,7 +22,7 @@ class Todo {
             this.todos.splice(numIndex, 1);
             return true;
         } else {
-            return false
+            return false;
         }
     }
 
@@ -37,12 +37,12 @@ class Todo {
     }
 
     next() {
-        if (this.todos.length !== 0){
-            const nexts = this.todos.sort( (a, b) => {
-                if(a.priority > b.priority){
+        if (this.todos.length !== 0) {
+            const nexts = this.todos.sort((a, b) => {
+                if(a.priority > b.priority) {
                     return -1;
                 }
-                if(a.priority < b.priority){
+                if(a.priority < b.priority) {
                     return 1;
                 }
                 return 0;
