@@ -28,7 +28,7 @@ class TODO {
     if (!this.todo.length) {
       throw new Error('There are no items');
     } else {
-      this.todo.sort((a, b) => a.priority - b.priority);
+      this.todo.sort((a, b) => b.priority - a.priority);
       return this.todo[0];
     }
   }
@@ -38,7 +38,7 @@ let test = new TODO();
 
 console.log(test);
 test.addItem('Kiev', 1);
-test.addItem('Ukraine', 1);
+test.addItem('Ukraine', 5);
 test.addItem('Russian', 3);
 test.addItem('Usa', 5);
 test.addItem('Georgia', 4);
