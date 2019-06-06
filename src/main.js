@@ -1,43 +1,53 @@
 'use strict';
 
 class Todo  {
-    constructor() {
-        this.todoPoints = [];
+  constructor() {
+    this.todoPoints = [];
+  }
+
+  addItem(title, priority) {
+    let todoPoint = {};
+    todoPoint.title = title;
+    todoPoint.priority = priority;
+    todoPoint.id = +Math.random().toString().substr(2, 4);
+    if (todoPoint.id === this.todoPoints.find(item => item.id)){
+      throw 'This ID already exists.'
+    } else {
+      this.todoPoints.push(todoPoint);
+      return todoPoint.id
     }
 
-    addItem(title, priority) {
-        let todoPoint = {};
-        todoPoint.title = title;
-        todoPoint.priority = priority;
-        todoPoint.id = +Math.random().toString().substr(2, 4);
-        this.todoPoints.push(todoPoint);
-        return todoPoint.id
-    }
+  }
 
-    getItem(id) {
-        let item = this.todoPoints.filter(item => item.id === id);
-        if (item.length <= 0) {
-            return null;
-        } else {
-            return item;
-        }
+  getItem(id) {
+    const item = this.todoPoints.filter(item => item.id === id);
+    if (item.length <= 0) {
+      return null;
     }
+    return item;
+  }
 
-    removeItem(id) {
-        let item = this.todoPoints.filter(item => item.id === id);
-        this.todoPoints = this.todoPoints.filter(item => item.id !== id);
-        return item.length > 0;
+  removeItem(id) {
+    const item = this.todoPoints.filter(item => item.id === id);
+    if (item.length === 0) {
+      return false
+    } else {
+      const filtredList = this.todoPoints.filter(item => item.id !== id);
+      if (!filtredList.includes(item)){
+        return true
+      }
     }
+  }
 
-    next() {
-        let highestPriority = Math.max.apply(Math, this.todoPoints.map(item => {return item.priority}))
-        let item = this.todoPoints.find(item => item.priority === highestPriority);
-        if (item.length <= 0) {
-            return "Error: no items in the list";
-        } else {
-            return item;
-        }
+  next() {
+    if (this.todoPoints.length === 0) {
+      throw 'This ToDoList is empty.'
     }
+    return this.todoPoints.map(item => item.priority).reduce(
+      (a, b) => {
+        return Math.max(a, b)
+      });
+  }
 }
 
 const todoItem = new Todo();
