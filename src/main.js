@@ -11,12 +11,11 @@ class Todo  {
     todoPoint.priority = priority;
     todoPoint.id = +Math.random().toString().substr(2, 4);
     if (todoPoint.id === this.todoPoints.find(item => item.id)){
-      throw 'This ID already exists.'
+      throw new Error('This ID already exists.')
     } else {
       this.todoPoints.push(todoPoint);
       return todoPoint.id
     }
-
   }
 
   getItem(id) {
@@ -31,22 +30,20 @@ class Todo  {
     const item = this.todoPoints.filter(item => item.id === id);
     if (item.length === 0) {
       return false
-    } else {
-      const filtredList = this.todoPoints.filter(item => item.id !== id);
-      if (!filtredList.includes(item)){
-        return true
-      }
+    }
+    const filtredList = this.todoPoints.filter(item => item.id !== id);
+    if (!filtredList.includes(item)){
+      this.todoPoints = filtredList;
+      return true
     }
   }
 
   next() {
     if (this.todoPoints.length === 0) {
-      throw 'This ToDoList is empty.'
+      throw new Error('This ToDoList is empty.')
     }
-    return this.todoPoints.map(item => item.priority).reduce(
-      (a, b) => {
-        return Math.max(a, b)
-      });
+    return this.todoPoints.map(item => item.priority)
+      .reduce((a, b) => Math.max(a, b));
   }
 }
 
