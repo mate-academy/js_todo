@@ -1,31 +1,29 @@
-"use strict";
+'use strict';
 
 class Todo {
   constructor() {
     this.list = [];
-    this.id = 1;
+    this.nextId = 1;
   }
 
   addItem(title, priority) {
     const item = {
-      id: this.id,
+      id: this.nextId,
       title: title,
       priority: priority
     };
 
-    this.id++;
+    this.nextId++;
     this.list.push(item);
 
     return item.id;
   }
 
   removeItem(id) {
-    const index = this.list.findIndex((item, i)=> {
-      if (item.id === id) {
-        return i;
-      }
+    const index = this.list.findIndex((item, i) => {
+      return item.id === id;
     });
-    if (!index) {
+    if (index === -1) {
       return false;
     }
     this.list.splice(index, 1);
@@ -33,10 +31,9 @@ class Todo {
   }
 
   getItem(id) {
-    for (let i = 0; i < this.list.length; i++) {
-      if (this.list[i].id === id) {
-        return this.list[i];
-      }
+    const item = this.list.find(currItem => currItem.id === id);
+    if (item) {
+      return item;
     }
     return null;
   }
@@ -47,8 +44,7 @@ class Todo {
     const highestPriority = this.list.reduce(
       (acc, curObj, index) => {
         if (curObj.priority > acc.priority) {
-          acc.priority = curObj.priority;
-          acc.index = index;
+          return curObj;
         }
         return acc;
       },
