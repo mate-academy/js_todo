@@ -1,4 +1,5 @@
 "use strict"
+
 class Todo {
   constructor() {
     this.listItems = [];
@@ -16,16 +17,12 @@ class Todo {
   }
 
   removeItem(id) {
-   let index = this.listItems.findIndex((elem) => {
-     return elem.id === id;
-   });
+   const index = this.listItems.find(elem => elem.id === id);
    this.listItems.splice(index, 1);
   }
 
   getItem(id) {
-    return this.listItems.find((elem) => {
-      return elem.id === id;
-    })
+    return this.listItems.find(elem => elem.id === id);
   }
 
   next() {
