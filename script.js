@@ -28,14 +28,12 @@ class Todo {
   }
 
   next() {
-    const pattern = this.toDoList[0];
+    
     if (this.toDoList.length > 1) {
-      this.toDoList.forEach(item => {
-        if(pattern.priority < item.priority) pattern = item;
-      })
-    } else {
+      this.toDoList.sort((item1, item2) => item2.priority - item1.priority);
       return this.toDoList[0];
     }
+      
     if (this.toDoList.length === 0) {
       throw new Error('TODOList is Empty');
     }
