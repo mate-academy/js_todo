@@ -1,6 +1,8 @@
+"use strict"
+
 class Todo {
   constructor() {
-    this.list = [];
+    this.list = [{id: 1},{id: 2},{id: 3}];
   }
 
   addItem(title, priority) {
@@ -13,22 +15,16 @@ class Todo {
   }
 
   removeItem(id) {
-    for (let item of this.list) {
-      if (item.id === id) {
-        this.list.splice(this.list(indexOf(item), 1));
-        return true;
-      }
-      return false;
+    const index = this.list.findIndex((elem) => elem.id == id);
+    if (index !== -1) {
+      this.list.splice(index, 1);
     }
+      return index !== -1;
   }
 
   getItem(id) {
-    for (let item of this.list) {
-      if (item.id === id) {
-        return this.list[this.list.indexOf(item)];
-      }
-    }
-    return null;
+    const elem = this.list.find((elem) => elem.id == id);
+    return elem ? elem : null;
   }
 
   next() {
@@ -43,7 +39,7 @@ class Todo {
       });
       return this.list[0];
     } catch (e) {
-      return e.message;
+      return e;
     }
   }
 }
