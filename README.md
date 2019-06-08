@@ -1,3 +1,6 @@
+GH-Pages
+https://sherjlok15.github.io/js_todo/
+
 # TODO
 
 Create the `Todo` class with the following methods:
