@@ -21,10 +21,11 @@ class Todo {
   removeItem(id) {
     const index = this.finder(id);
     this.todoList.splice(index, 1);
+    return index === -1 ? false : true;
   }
 
   getItem(id) {
-    return this.todoList[this.finder(id)] || null;
+    return this.todoList.find((elem) => elem[`id`]) || null;
   }
 
   next() {
