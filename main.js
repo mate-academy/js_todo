@@ -21,13 +21,14 @@ class Todo {
   }
   removeItem(id) {
     delete this.items[id];
-    return this.items[id] ? true : false;
+    return this.items[id] 
+             ? true
+             : false;
   }
   getItem(id) {
     return this.items[id] ? this.items[id] : null;
   }
   next() {
-    try {
       if (Object.keys(this.list).length === 0) {
         throw new Error("is empty!");
       }
@@ -37,9 +38,5 @@ class Todo {
         if(x.priority === y.priority) return 0;
       });
       return this.items[0];
-    } catch(e) {
-    console.log(e);
-      return false;
-    }
-  }
+   }
 }
