@@ -1,3 +1,5 @@
+'use strict';
+
 class Todo {
   constructor() {
     this.todos = [];
@@ -12,10 +14,8 @@ class Todo {
   removeItem(id) {
     const index = this.todos.findIndex(item => item.id === id);
     if (index >= 0) {
-      this.todos.splice(index, 1)
+      this.todos.splice(index, 1);
       return true;
-    } else {
-      return false;
     }
   }
 
@@ -23,23 +23,15 @@ class Todo {
     const index = this.todos.findIndex(item => item.id === id);
     if (index >= 0) {
       return this.todos[index];
-    } else {
-      return null;
     }
   }
 
   next() {
     if (this.todos.length) {
-      let maxPriority = {"priority": -Infinity};
-      this.todos.map(item => {
-        if (item.priority > maxPriority.priority) {
-          maxPriority = item;
-        }
-      });
-      return maxPriority;
-    } else {
-      return console.log('There are no items in the list');
+      const max = Math.max(this.todos);
+      return max;
     }
+    return console.log('There are no items in the list');
   }
 }
 
