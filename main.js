@@ -7,8 +7,10 @@ class Todo {
   }
 
   addItem(title, priority) {
-    this.todos.push({"id": this.id, "title": title, "priority": priority});
-    this.id++;    
+    const id = this.id;
+    this.todos.push({id, title, priority});
+    this.id++;
+    return id;
   }
 
   removeItem(id) {
@@ -46,6 +48,9 @@ a.next();
 a.addItem('Some title_1', 3);
 a.addItem('Some title_2', 2);
 a.removeItem(1);
+a.removeItem(1);
 a.addItem('Some title_3', 1);
 a.addItem('Some title_4', 10);
+a.getItem(3);
+a.getItem(30);
 a.next();
