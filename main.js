@@ -8,7 +8,7 @@ class Todo {
 
   addItem(title, priority) {
     this.todos.push({"id": this.id, "title": title, "priority": priority});
-    this.id++;
+    this.id++;    
   }
 
   removeItem(id) {
@@ -17,6 +17,7 @@ class Todo {
       this.todos.splice(index, 1);
       return true;
     }
+    return false;
   }
 
   getItem(id) {
@@ -24,20 +25,27 @@ class Todo {
     if (index >= 0) {
       return this.todos[index];
     }
+    return null;
   }
 
   next() {
-    if (this.todos.length) {
-      const max = Math.max(this.todos);
-      return max;
+    try {
+      const max = this.todos.sort((a,b) => b["priority"] - a["priority"]);
+      if (!this.todos.length) {
+        throw new SyntaxError('There are no items in the list');
+      }
+      return max[0];
+    } catch (e) {
+      return console.log(e.message);
     }
-    return console.log('There are no items in the list');
   }
 }
 
 const a = new Todo();
-a.addItem('Some title', 3);
+a.next();
+a.addItem('Some title_1', 3);
 a.addItem('Some title_2', 2);
 a.removeItem(1);
 a.addItem('Some title_3', 1);
-a.addItem('Some title_5', 10);
+a.addItem('Some title_4', 10);
+a.next();
