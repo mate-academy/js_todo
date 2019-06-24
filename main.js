@@ -7,8 +7,8 @@ class Todo {
 	}
 
 	addItem(title, priority) {
-		if (typeof priority !== 'number') {
-			throw new Error('"priority" should be a number');
+		if (typeof priority !== 'number' && priority > 0) {
+			throw new Error('"priority" should be a number bigger than 0');
 		} else {
 			this.todoList.push({
 				title: title,
@@ -21,11 +21,9 @@ class Todo {
 
 	removeItem(id) {
 		const currentItem = this.todoList.findIndex(el => el.id === id);
-		if (currentItem === -1) {
-			return false;
-		}
+		if (currentItem === -1) return false;
 		this.todoList.splice(currentItem, 1);
-    		return true;		
+    return true;		
 	}
 
 	getItem(id) {
@@ -56,5 +54,3 @@ todo.getItem(1);
 console.log(todo.next());
 console.log(todo.getItem(1));
 console.log(todo);
-
-
