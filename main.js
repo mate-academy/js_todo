@@ -38,7 +38,7 @@ class Todo {
       }
       return max[0];
     } catch (e) {
-      return console.log(e.message);
+      console.log(e.message);
     }
   }
 }
