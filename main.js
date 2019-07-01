@@ -8,7 +8,7 @@ class Todo {
 
   addItem(title, priority) {
     const id = this.id;
-    this.todos.push({id, title, priority});
+    this.todos.push({ id, title, priority });
     this.id++;
     return id;
   }
@@ -31,15 +31,11 @@ class Todo {
   }
 
   next() {
-    try {
-      const max = this.todos.sort((a,b) => b["priority"] - a["priority"]);
-      if (!this.todos.length) {
-        throw new SyntaxError('There are no items in the list');
-      }
-      return max[0];
-    } catch (e) {
-      console.log(e.message);
+    const max = this.todos.sort((a, b) => b["priority"] - a["priority"]);
+    if (!this.todos.length) {
+      throw new SyntaxError('There are no items in the list');
     }
+    return max[0];
   }
 }
 
