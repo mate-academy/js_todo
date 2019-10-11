@@ -20,12 +20,13 @@ class Todo {
   }
 
   getItem(id) {
-    let index = this.list.findIndex(item => item.id === id);
-    return index === -1 ? null : `id: ${this.list[index].id}, title: ${this.list[index].title}, priopity: ${this.list[index].priority}`; 
+    let element = this.list.find(item => item.id === id);
+    return element === -1 ? null : `id: ${element.id}, title: ${element.title}, priopity: ${element.priority}`; 
   }
 
   next() {
     const sortList = this.list.sort((a, b) => b.priority - a.priority); 
-    console.log(this.list[0]); 
+    return this.list[0]; 
   }
 }
+
