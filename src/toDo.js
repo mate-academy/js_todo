@@ -25,8 +25,9 @@ class Todo {
   }
 
   next() {
-    const sortList = this.list.sort((a, b) => b.priority - a.priority); 
+    const sortList = this.list.sort((a, b) => a.priority - b.priority); 
     return this.list[0]; 
   }
 }
+
 
