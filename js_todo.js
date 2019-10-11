@@ -1,37 +1,44 @@
 class Todo {
-    constructor() {
-        this.list = [];
-    }
+  constructor() {
+    this.list = [];
+    this.counter = 1;
+  }
 
-    addItem(title, priority, id = 0) {
-        this.list.push({ title: title, priority: priority, id: id });
-        return console.log(this.list);
-    }
+  addItem(title, priority) {
+    this.list.push({ title: title, priority: priority, id: this.counter });
+    this.counter++;
+    return console.log(this.list);
+  }
 
-    removeItem(id) {
-        if (this.list[id]) {
-            this.list.splice(id, 1);
-            return console.log(true);
-        }
-        return console.log(false);
-    }
+  findItem(id) {
+    const index = this.list.findIndex((elem, index) => elem.id === id);
+    return index;
+  }
 
-    getItem(id) {
-        if (this.list[id]) {
-            return console.log(this.list[id]);
-        }
-        return console.log(`id ${id} is not found`);
+  removeItem(id) {
+    const index = this.findItem(id);
+    if (this.list[index]) {
+      this.list.splice(index, 1);
+      return console.log(true);
     }
+    return console.log(false);
+  }
 
-    next() {
-
-        for (let i = 0; i < this.list.length; i++) {
-            if (this.list[i].priority === 1){
-                return console.log(this.list[i]);
-            }
-        }
-        return console.log(`There is no the highest priority work to do.`)
+  getItem(id) {
+    const index = this.findItem(id);
+    if (this.list[index]) {
+      return console.log(this.list[index]);
     }
+    return console.log(`id ${id} is not found`);
+  }
+
+  next() {
+    for (let i = 1; i <= this.list.length; i++) {
+      const element = this.list.find((elem, index) => elem.priority === i);
+      return console.log(element);
+    }
+    return console.log(`There is no work to do.`)
+  }
 }
 
 const list = new Todo();
@@ -39,7 +46,7 @@ const list = new Todo();
 list.addItem('fallAsleep', 1);
 list.addItem('eatCake', 2);
 list.addItem('petCat', 3);
-list.removeItem(5);
+list.removeItem(2);
 list.addItem('petDog', 4);
-list.getItem(19);
+list.getItem(3);
 list.next();
