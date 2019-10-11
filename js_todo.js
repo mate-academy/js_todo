@@ -33,11 +33,8 @@ class Todo {
   }
 
   next() {
-    for (let i = 1; i <= this.list.length; i++) {
-      const element = this.list.find((elem, index) => elem.priority === i);
-      return console.log(element);
-    }
-    return console.log(`There is no work to do.`)
+    const element = this.list.sort((a,b) => a.priority - b.priority);
+    return console.log(element || `There is no work to do.`);
   }
 }
 
