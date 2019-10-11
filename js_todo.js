@@ -34,7 +34,7 @@ class Todo {
 
   next() {
     const element = this.list.sort((a,b) => a.priority - b.priority);
-    return console.log(element || `There is no work to do.`);
+    return console.log(element[0] || `There is no work to do.`);
   }
 }
 
