@@ -1,6 +1,6 @@
 class Todo{
   constructor(){
-    this.list = new Set;
+    this.list = new Map;
     this.id = 1000;
   }
 
@@ -9,26 +9,19 @@ class Todo{
     item.title = title;
     item.priority = priority;
     this.id++
-    item.id = this.id; 
-    this.list.add(item);
+    this.list.set(this.id, item);
   }
 
   removeItem(id) {
-    for (let item of this.list) {
-      if (item.id === id) {
-        return this.list.delete(item);
-      }
-    }
-    return false;
+    return this.list.delete(id);
   }
 
   getItem(id) {
-    for (let item of this.list) {
-      if (item.id === id) {
-        return item;
-      }
+    const value = this.list.get(id);
+    if (value) {
+      value.id = id;
     }
-    return null;    
+    return value ? value : null;
   }
 
   next() {
@@ -40,19 +33,17 @@ class Todo{
     }
     let highPriority = -Infinity;
     let lowerID = Infinity;
-    let res;
-    for (let item of this.list) {
+    for (let id of this.list.keys()) {
+      let item = this.list.get(id);
       if (item.priority > highPriority) {
         highPriority = item.priority;
-        lowerID = item.id;
-        res = item;
+        lowerID = id;
       } else if (item.priority === highPriority) {
-        if (item.id < lowerID) {
-          lowerID = item.id;
-          res = item;
+        if (id < lowerID) {
+          lowerID = id;
         }
       }
     }
-    return res;
+    return this.getItem(lowerID);
   }
 }
