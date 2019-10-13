@@ -7,7 +7,7 @@ class Todo {
   addItem(title, priority) {
     this.list.push({ title: title, priority: priority, id: this.counter });
     this.counter++;
-    return console.log(this.list);
+    return this.list;
   }
 
   findItem(id) {
@@ -19,22 +19,22 @@ class Todo {
     const index = this.findItem(id);
     if (this.list[index]) {
       this.list.splice(index, 1);
-      return console.log(true);
+      return true;
     }
-    return console.log(false);
+    return false;
   }
 
   getItem(id) {
     const index = this.findItem(id);
     if (this.list[index]) {
-      return console.log(this.list[index]);
+      return this.list[index];
     }
-    return console.log(`id ${id} is not found`);
+    return `id ${id} is not found`;
   }
 
   next() {
     const element = this.list.sort((a,b) => a.priority - b.priority);
-    return console.log(element[0] || `There is no work to do.`);
+    return element[0] || `There is no work to do.`;
   }
 }
 
