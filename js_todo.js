@@ -26,7 +26,7 @@ class Todo{
 
   next() {
     try {
-      if (this.list.size === 0) throw 'error'
+      if (!this.list.size) throw 'error'
     }
     catch(err) {
       return err;
