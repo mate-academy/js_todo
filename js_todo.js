@@ -33,8 +33,10 @@ class Todo {
   }
 
   next() {
-    const element = this.list.sort((a,b) => a.priority - b.priority);
-    return element[0] || `There is no work to do.`;
+    if (this.list) {
+      return this.list.sort((a,b) => a.priority - b.priority);
+    }
+    return `There is no work to do.`;
   }
 }
 
