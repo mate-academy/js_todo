@@ -5,14 +5,14 @@ class ToDo {
   }
 
   addItem(title, priority) {
-    this.array.push({ title: title, priority: priority, id: ++this.id });
+    this.array.push({ title, priority, id: ++this.id });
     return this.array;
   }
 
   removeItem(id) {
-    for (let key of this.array) {
-      if (key.id === id) {
-        return this.array.splice(this.array.indexOf(key), 1);
+    for (let i = 0; i < this.array.length; i++) {
+      if (this.array[i].id === id) {
+        return this.array.splice(i, 1);
       } else {
         return false;
       }
@@ -20,12 +20,7 @@ class ToDo {
   }
 
   getItem(id) {
-    for (let key of this.array) {
-      if (key.id === id) {
-        return key;
-      }
-      return null;
-    }
+    return this.array[id];
   }
 
   next() {
