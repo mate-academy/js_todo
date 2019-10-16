@@ -19,12 +19,7 @@ class TODO {
   }
 
   getItem(id) {
-    for (let item of this.list) {
-      if (item.id === id) {
-        return item;
-      }
-      return null;
-    }
+    return this.list.find(item => item.id === id);
   }
 
   next() {
