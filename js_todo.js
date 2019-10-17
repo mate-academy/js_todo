@@ -1,6 +1,6 @@
 class Todo{
   constructor(){
-    this.list = new Map;
+    this.list = [];
     this.id = 1000;
   }
 
@@ -8,39 +8,43 @@ class Todo{
     const item = {};
     item.title = title;
     item.priority = priority;
-    this.id++
-    this.list.set(this.id, item);
+    this.id++;
+    item.id = this.id;
+    this.list.push(item);
   }
 
   removeItem(id) {
-    return this.list.delete(id);
+    const index = this.list.findIndex(item => item.id === id);
+    if (index === -1) {
+      return false;
+    } else {
+      this.list.splice(index, 1);
+      return true;
+    }
   }
 
   getItem(id) {
-    const value = this.list.get(id);
-    if (value) {
-      value.id = id;
-    }
-    return value ? value : null;
+    const index = this.list.findIndex(item => item.id === id);
+    return index === -1 ? null : this.list[index];
   }
 
   next() {
     try {
-      if (!this.list.size) throw 'error'
+      if (!this.list.length) throw 'error'
     }
     catch(err) {
       return err;
     }
     let highPriority = -Infinity;
     let lowerID = Infinity;
-    for (let id of this.list.keys()) {
-      let item = this.list.get(id);
+    for (let i = 0; i < this.list.length; i++) {
+      const item = this.list[i];
       if (item.priority > highPriority) {
         highPriority = item.priority;
-        lowerID = id;
+        lowerID = item.id;
       } else if (item.priority === highPriority) {
-        if (id < lowerID) {
-          lowerID = id;
+        if (item.id < lowerID) {
+          lowerID = item.id;
         }
       }
     }
