@@ -29,12 +29,7 @@ class Todo{
   }
 
   next() {
-    try {
-      if (!this.list.length) throw 'error'
-    }
-    catch(err) {
-      return err;
-    }
+    if (!this.list.length) throw 'error';
     let highPriority = -Infinity;
     let lowerID = Infinity;
     for (let i = 0; i < this.list.length; i++) {
