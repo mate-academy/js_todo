@@ -23,14 +23,11 @@ class ToDo {
   }
 
   getItem(id) {
-    for (let obj of this.list) {
-      if (obj.id === id) {
+    const requiredObj = this.list.find(function(obj) {
+      return obj.id === id;
+    });
 
-        return obj;
-      }
-    }
-
-    return null;
+    return requiredObj ? requiredObj : null;
   }
 
   next() {
@@ -38,18 +35,10 @@ class ToDo {
       throw new Error('List is Empty');
     }
 
-    let mostHighPriority = this.list.reduce(function(max, obj) {
-      return max = obj.priority > max ? obj.priority : max; 
-    }, -Infinity);
-    let resultedArray = [];
-
-    for (let obj of this.list) {
-      if (obj.priority === mostHighPriority) {
-        resultedArray.push(obj);
-
-        return resultedArray[resultedArray.length - 1];
-      }
-    }
+    this.list.sort(function(a, b) { 
+      return a.priority - b.priority
+    }); 
+    return this.list[0]; 
   }
 }
 
