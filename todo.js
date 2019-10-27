@@ -23,15 +23,15 @@ class ToDo {
   }
 
   getItem(id) {
-    const requiredObj = this.list.find(function(obj) {
+    const requiredObj = this.list.find(obj => {
       return obj.id === id;
     });
 
-    return requiredObj ? requiredObj : null;
+    return requiredObj || null;
   }
 
   next() {
-    if (this.list.length === 0) {
+    if (!this.list.length) {
       throw new Error('List is Empty');
     }
 
