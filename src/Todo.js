@@ -4,8 +4,8 @@ class Todo {
   constructor() {
     this.todo = {};
     this.idCount = 1;
-    this.highiestPriority = 0;
-    this.highiestPriorityID = undefined;
+    // this.highiestPriority = 0;
+    // this.highiestPriorityID = undefined;
   }
 
   addItem(title, priority) {
@@ -39,8 +39,17 @@ class Todo {
   }
 
   next() {
+    const priorities = [];
+    let highiestPriority = 0;
+
     for (const item in this.todo) {
-      if (this.todo[item][1] === this.highiestPriority) {
+      priorities.push(+this.todo[item][1]);
+    }
+
+    highiestPriority = Math.max(...priorities);
+
+    for (const item in this.todo) {
+      if (this.todo[item][1] === highiestPriority) {
         return {
           id: +item,
           title: this.todo[item][0],
