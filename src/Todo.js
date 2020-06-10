@@ -28,11 +28,7 @@ class Todo {
   getItem(id) {
     const item = this.items.find((el) => (el.getId() === id));
 
-    if (!item) {
-      return null;
-    }
-
-    return item;
+    return item || null;
   };
 
   next() {
