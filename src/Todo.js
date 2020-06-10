@@ -2,46 +2,64 @@
 
 class Todo {
   constructor() {
-    this.list = [];
+    this.list = new Map();
+  }
+
+  _generateId() {
+    let id = this.list.size + 1;
+
+    while (this.list.has(id)) {
+      id = Math.ceil(Math.random() * (this.list.size + 1));
+    }
+
+    return id;
   }
 
   addItem(title, priority) {
-    let id = this.list.length + 1;
+    const id = this._generateId();
 
-    while (this.list.some(item => item.id === id)) {
-      id = Math.ceil(Math.random() * (this.list.length + 1));
-    }
-
-    this.list.push({
+    this.list.set(id, {
       title,
       priority,
-      id,
     });
 
     return id;
   }
 
   removeItem(id) {
-    const checkItem = item => item.id !== id;
-
-    if (this.list.some(checkItem)) {
+    if (!this.list.has(id)) {
       return false;
     }
 
-    this.list.filter(checkItem);
+    this.list.delete(id);
 
     return true;
   }
 
   getItem(id) {
-    return this.list.find(item => item.id === id) || null;
+    return this.list.has(id)
+      ? {
+        id,
+        ...this.list.get(id),
+      }
+      : null;
   }
 
   next() {
-    const highestPriorityItem = this.list.reduce((previous, current) =>
-      current.priority > previous.priority ? current : previous);
+    let highestPriorityItem = { priority: null };
 
-    return highestPriorityItem || Error;
+    for (const [id, value] of this.list.entries()) {
+      if (value.priority > highestPriorityItem.priority) {
+        highestPriorityItem = {
+          id,
+          ...value,
+        };
+      }
+    }
+
+    return highestPriorityItem.priority
+      ? highestPriorityItem
+      : Error;
   }
 }
 
