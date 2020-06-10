@@ -33,14 +33,13 @@ class Todo {
   }
 
   next() {
-    const priorities = [];
     let highiestPriority = 0;
 
     for (const item in this.todo) {
-      priorities.push(this.todo[item][1]);
+      highiestPriority = this.todo[item][1] > highiestPriority
+        ? this.todo[item][1]
+        : highiestPriority;
     }
-
-    highiestPriority = Math.max(...priorities);
 
     for (const item in this.todo) {
       if (this.todo[item][1] === highiestPriority) {
