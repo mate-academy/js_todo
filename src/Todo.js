@@ -54,7 +54,7 @@ class Todo {
 
 class TodoItem {
   constructor(title, priority) {
-    this.id = Math.floor(Math.random() * 1e5);
+    this.id = generateId();
     this.title = title;
     this.priority = priority;
   }
@@ -69,6 +69,10 @@ class TodoItem {
     return this.priority;
   };
 };
+
+function generateId() {
+  return Math.floor(Math.random() * 1e5);
+}
 
 module.exports = {
   Todo,
