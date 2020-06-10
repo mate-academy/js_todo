@@ -4,8 +4,6 @@ class Todo {
   constructor() {
     this.todo = {};
     this.idCount = 1;
-    // this.highiestPriority = 0;
-    // this.highiestPriorityID = undefined;
   }
 
   addItem(title, priority) {
