@@ -33,9 +33,10 @@ class Todo {
   }
 
   next() {
-    const priorityTodos = this.todos.map(todo => todo.priority);
     const priorityTodo = this.todos
-      .find(todo => todo.priority === Math.max(...priorityTodos));
+      .reduce((accum, todo) => accum.priority < todo.priority
+        ? todo : accum
+      );
 
     return priorityTodo || Error;
   }
