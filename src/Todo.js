@@ -41,7 +41,7 @@ class Todo {
     let highiestPriority = 0;
 
     for (const item in this.todo) {
-      priorities.push(+this.todo[item][1]);
+      priorities.push(this.todo[item][1]);
     }
 
     highiestPriority = Math.max(...priorities);
