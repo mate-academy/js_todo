@@ -13,7 +13,6 @@ class Todo {
 
     if (priority > this.highiestPriority) {
       this.highiestPriority = priority;
-      this.highiestPriorityID = this.idCount;
     }
 
     return this.idCount++;
@@ -40,11 +39,15 @@ class Todo {
   }
 
   next() {
-    return {
-      id: this.highiestPriorityID,
-      title: this.todo[this.highiestPriorityID][0],
-      priority: this.todo[this.highiestPriorityID][1],
-    };
+    for (const item in this.todo) {
+      if (this.todo[item][1] === this.highiestPriority) {
+        return {
+          id: +item,
+          title: this.todo[item][0],
+          priority: this.todo[item][1],
+        };
+      }
+    }
   }
 }
 
