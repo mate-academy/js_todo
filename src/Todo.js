@@ -9,10 +9,6 @@ class Todo {
   addItem(title, priority) {
     this.todo[this.idCount] = [title, priority];
 
-    if (priority > this.highiestPriority) {
-      this.highiestPriority = priority;
-    }
-
     return this.idCount++;
   }
 
