@@ -2,23 +2,25 @@
 
 class Todo {
   constructor() {
-    this.listOfItems = [];
-    this.idNumber = -1;
+    this.list = [];
+    this.uniqueId = -1;
   }
-  addItem(titleInput, priorityInput) {
-    this.idNumber++;
+  addItem(title, priority) {
+    const id = ++this.uniqueId;
 
-    this.listOfItems[this.idNumber] = {
-      id: this.idNumber,
-      priority: priorityInput,
-      title: titleInput,
+    this.list[id] = {
+      id,
+      priority,
+      title,
     };
 
-    return this.idNumber;
+    return id;
   }
   removeItem(id) {
-    if (this.listOfItems.find(element => element.id === id) !== undefined) {
-      this.listOfItems.splice(id, 1);
+    const checker = this.list.find(element => element.id === id);
+
+    if (checker !== undefined) {
+      this.list.splice(id, 1);
 
       return true;
     }
@@ -27,18 +29,14 @@ class Todo {
   }
 
   getItem(id) {
-    return (this.listOfItems.hasOwnProperty(id))
-      ? this.listOfItems[id]
-      : null;
+    return this.list[id] || null;
   }
   next() {
-    const priorityList = this.listOfItems.map(element => element.priority);
-    const output = this.listOfItems
-      .find(element => element.priority === Math.max.apply(null, priorityList));
+    const priorityList = this.list.map(element => element.priority);
+    const output = this.list
+      .find(element => element.priority === Math.max(...priorityList));
 
-    return (output !== undefined)
-      ? output
-      : Error;
+    return output || Error;
   }
 }
 
