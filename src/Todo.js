@@ -38,9 +38,10 @@ class Todo {
   }
 
   next() {
-    return this.list.reduce((previous, current) =>
-      current.priority > previous.priority ? current : previous)
-      || Error;
+    const highestPriorityItem = this.list.reduce((previous, current) =>
+      current.priority > previous.priority ? current : previous);
+
+    return highestPriorityItem || Error;
   }
 }
 
