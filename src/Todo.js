@@ -14,7 +14,7 @@ class Todo {
   };
 
   removeItem(id) {
-    const deleted = this.items.filter((item) => item.getId() !== id);
+    const deleted = this.items.filter((item) => item.id !== id);
 
     if (this.items.length > deleted.length) {
       this.items = deleted;
@@ -26,7 +26,7 @@ class Todo {
   };
 
   getItem(id) {
-    const item = this.items.find((el) => (el.getId() === id));
+    const item = this.items.find((el) => (el.id === id));
 
     return item || null;
   };
@@ -36,11 +36,11 @@ class Todo {
       throw Error;
     }
 
-    let highestPriority = this.items[0];
-
-    this.items.forEach((item) => {
-      if (item.getPriority() > highestPriority.getPriority()) {
-        highestPriority = item;
+    const highestPriority = this.items.reduce((previous, current) => {
+      if (current.priority > previous.priority) {
+        return current;
+      } else {
+        return previous;
       }
     });
 
@@ -54,16 +54,6 @@ class TodoItem {
     this.title = title;
     this.priority = priority;
   }
-
-  getId() {
-    return this.id;
-  };
-  getTitle() {
-    return this.title;
-  };
-  getPriority() {
-    return this.priority;
-  };
 };
 
 function generateId() {
