@@ -51,11 +51,6 @@ class Todo {
   }
 }
 
-// let todo1 = new Todo();
-// todo1.addItem('Buy2', 'milk2')
-// todo1.addItem('Buy23', 'milk32')
-// console.log(todo1.next());
-
 module.exports = {
   Todo,
 };
