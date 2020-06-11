@@ -1,8 +1,60 @@
 'use strict';
 
 class Todo {
-  // write code here
+  constructor() {
+    this.list = [];
+    this.id = 0;
+  }
+
+  addItem(title, priority) {
+    this.id++;
+
+    const task = {
+      id: this.id,
+      title: title,
+      priority: priority,
+    };
+
+    this.list.push(task);
+
+    return task.id;
+  }
+
+  removeItem(id) {
+    const deleted = this.list.filter(task => task.id !== id);
+
+    if (deleted.length === this.list.length) {
+      return false;
+    } else {
+      this.id = deleted;
+
+      return true;
+    }
+  }
+
+  getItem(id) {
+    const lookingTask = this.list.find(task => task.id === id);
+
+    return !lookingTask ? null : lookingTask;
+  }
+
+  next() {
+    let priorityHigh = this.list[0];
+
+    for (const task of this.list) {
+      if (task.priority > priorityHigh.priority) {
+        priorityHigh = task;
+      }
+    }
+
+    return !priorityHigh ? new Error('There are no items') : priorityHigh;
+  }
 }
+
+// let todo1 = new Todo();
+// todo1.addItem('Buy2', 'milk2')
+// todo1.addItem('Buy23', 'milk32')
+// console.log(todo1.next());
 
 module.exports = {
   Todo,
