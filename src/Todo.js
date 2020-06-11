@@ -7,13 +7,11 @@ class Todo {
   }
 
   addItem(title, priority) {
-    this.list.push(
-      {
-        title: title,
-        priority: priority,
-        id: this.id,
-      }
-    );
+    this.list.push({
+      title: title,
+      priority: priority,
+      id: this.id,
+    });
     this.id++;
 
     return this.id - 1;
