@@ -27,9 +27,9 @@ class Todo {
   getItem(id) {
     if (this.toDoList.has(id)) {
       return this.toDoList.get(id);
-    } else {
-      return null;
-    };
+    }
+
+    return null;
   }
 
   next() {
