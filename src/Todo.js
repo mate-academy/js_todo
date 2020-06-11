@@ -7,23 +7,21 @@ class Todo {
   }
 
   addItem(title, priority) {
-    this.list.push(
-      {
-        title: title,
-        priority: priority,
-        id: this.id,
-      }
-    );
+    this.list.push({
+      title: title,
+      priority: priority,
+      id: this.id,
+    });
     this.id++;
 
     return this.id - 1;
   }
 
   removeItem(id) {
-    const removedIndex = this.list.findIndex(item => item.id === id);
+    const index = this.list.findIndex(item => item.id === id);
 
-    if (removedIndex > -1) {
-      this.list.splice(removedIndex, 1);
+    if (index > -1) {
+      this.list.splice(index, 1);
 
       return true;
     }
