@@ -20,7 +20,7 @@ class Todo {
   }
 
   removeItem(id) {
-    const removedIndex = this.list.findIndex(item => item.id === id);
+    const index = this.list.findIndex(item => item.id === id);
 
     if (removedIndex > -1) {
       this.list.splice(removedIndex, 1);
