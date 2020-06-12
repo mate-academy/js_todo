@@ -50,8 +50,9 @@ class Todo {
       }
     }
 
-    const priorityItem = arrayList
-      .filter(item => item[1].priority === highestPriority);
+    const priorityItem = arrayList.filter(item => (
+      item[1].priority === highestPriority
+    ));
 
     return {
       id: priorityItem[0][0],
