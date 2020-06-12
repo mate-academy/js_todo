@@ -23,13 +23,13 @@ class Todo {
   removeItem(id) {
     const deleted = this.list.filter(task => task.id !== id);
 
-    if (deleted.length === this.list.length) {
-      return false;
-    } else {
-      this.id = deleted;
+    if (this.list.length > deleted.length) {
+      this.list = deleted;
 
       return true;
     }
+
+    return false;
   }
 
   getItem(id) {
