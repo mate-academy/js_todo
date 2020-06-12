@@ -3,34 +3,33 @@
 class Todo {
   constructor() {
     this.list = [];
-    this.idCount = 1;
+    this.count = 1;
   }
   addItem(title, priority) {
     this.list.push({
-      'title': title, 'priority': priority, 'id': this.idCount,
+      'title': title, 'priority': priority, 'id': this.count,
     });
-    this.idCount++;
 
-    return this.idCount - 1;
+    return this.count++;
   };
   removeItem(id) {
     if (this.list.some(item => item.id === id)) {
       this.list = this.list.filter(item => item.id !== id);
 
       return true;
-    } else {
-      return false;
     }
+
+    return false;
   }
   getItem(id) {
-    const findElem = this.list.find(item => item.id === id);
+    const item = this.list.find(currentItem => currentItem.id === id);
 
-    return (findElem !== undefined)
-      ? findElem : null;
+    return item || null;
   }
   next() {
+    const maxPriorityValue = Math.max(...this.list.map(item => item.priority));
     const maxPriorityItem = this.list.find(item =>
-      item.priority === Math.max(...this.list.map(x => x.priority)));
+      item.priority === maxPriorityValue);
 
     return maxPriorityItem || 'error';
   }
