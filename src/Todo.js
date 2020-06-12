@@ -28,8 +28,9 @@ class Todo {
   }
   next() {
     const maxPriorityValue = Math.max(...this.list.map(item => item.priority));
-    const maxPriorityItem = this.list.find(item =>
-      item.priority === maxPriorityValue);
+    const maxPriorityItem = this.list.find(item => (
+      item.priority === maxPriorityValue
+    ));
 
     return maxPriorityItem || 'error';
   }
