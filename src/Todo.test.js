@@ -41,27 +41,27 @@ describe('Todo', () => {
     it('should return boolean value', () => {
       const id = todo.addItem('Go gym', 2);
 
-      const haveBeenRemoverd1 = todo.removeItem(id);
-      const haveBeenRemoverd2 = todo.removeItem(100);
+      const haveBeenRemoved1 = todo.removeItem(id);
+      const haveBeenRemoved2 = todo.removeItem(100);
 
-      expect(typeof haveBeenRemoverd1).toBe('boolean');
-      expect(typeof haveBeenRemoverd2).toBe('boolean');
+      expect(typeof haveBeenRemoved1).toBe('boolean');
+      expect(typeof haveBeenRemoved2).toBe('boolean');
     });
 
     it('should return true if item have been removed', () => {
       const id = todo.addItem('Go gym', 2);
 
-      const haveBeenRemoverd = todo.removeItem(id);
+      const haveBeenRemoved = todo.removeItem(id);
 
-      expect(haveBeenRemoverd).toBe(true);
+      expect(haveBeenRemoved).toBe(true);
     });
 
     it('should return false if item have not been removed', () => {
       todo.addItem('Go gym', 2);
 
-      const haveBeenRemoverd = todo.removeItem(100);
+      const haveBeenRemoved = todo.removeItem(100);
 
-      expect(haveBeenRemoverd).toBe(false);
+      expect(haveBeenRemoved).toBe(false);
     });
   });
 
