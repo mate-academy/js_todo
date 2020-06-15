@@ -3,27 +3,24 @@
 class Todo {
   constructor() {
     this.list = new Map();
-    this.uniqueId = 0;
+    this.id = 0;
   }
 
   addItem(title, priority) {
-    const generatedId = this.uniqueId++;
-
-    this.list.set(generatedId, {
+    this.list.set(++this.id, {
       title, priority,
     });
 
-    return generatedId;
+    return this.id;
   }
 
   removeItem(id) {
-    if (this.list.delete(id)) {
-      this.list.delete(id);
-
-      return true;
+    if (!this.list.has(id)) {
+      return false;
     }
+    this.list.delete(id);
 
-    return false;
+    return true;
   }
 
   getItem(id) {
