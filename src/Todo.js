@@ -1,27 +1,19 @@
 /* eslint-disable no-shadow */
 'use strict';
 
-let id = 0;
-
-function idGenerator() {
-  id++;
-
-  return id;
-}
-
 class Todo {
   constructor() {
     this.list = new Map();
+    this.id = 0;
   }
 
   addItem(title, priority) {
-    this.list.set(idGenerator(), {
-      id,
+    this.list.set(++this.id, {
       title,
       priority,
     });
 
-    return id;
+    return this.id;
   }
 
   removeItem(id) {
@@ -29,21 +21,29 @@ class Todo {
   }
 
   getItem(id) {
-    return id && this.list.get(id) !== undefined ? this.list.get(id) : null;
+    if (this.list.has(id)) {
+      return {
+        id, ...this.list.get(id),
+      };
+    }
+
+    return null;
   }
 
   next() {
     const priorityList = [];
 
-    for (const p of this.list.entries()) {
-      priorityList.push(p[1].priority);
+    for (const key of this.list.entries()) {
+      priorityList.push(key[1].priority);
     }
 
-    const max = Math.max.apply(null, priorityList);
+    const max = Math.max(...priorityList);
 
-    for (const p of this.list.entries()) {
-      if (p[1].priority === max) {
-        return p[1];
+    for (const key of this.list.entries()) {
+      if (key[1].priority === max) {
+        key[1].id = key[0];
+
+        return key[1];
       }
     }
   }
