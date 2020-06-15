@@ -3,16 +3,17 @@
 class Todo {
   constructor() {
     this.toDoList = [];
+    this.idCounter = 0;
   }
 
   addItem(title, priority) {
-    const id = Number(this.toDoList.length);
+    const id = this.idCounter++;
 
-    this.toDoList[id] = {
+    this.toDoList.push({
       id: id,
       title: title,
       priority: priority,
-    };
+    });
 
     return id;
   }
