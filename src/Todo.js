@@ -20,12 +20,12 @@ class Todo {
 
   removeItem(id) {
     if (this.elements[id]) {
-      this.elements.splice(id, 1);
+      this.elements[id] = null;
 
       return true;
-    } else {
-      return false;
     }
+
+    return false;
   }
 
   getItem(id) {
@@ -33,9 +33,9 @@ class Todo {
       return (
         this.elements[id]
       );
-    } else {
-      return null;
-    };
+    }
+
+    return null;
   }
 
   next() {
