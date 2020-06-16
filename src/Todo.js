@@ -35,13 +35,13 @@ class Todo {
   };
 
   next() {
-    if (this.length === 0) {
-      throw Error;
+    if (!this.todoList.length) {
+      throw new Error('empty array');
     }
 
     this.todoList.sort((a, b) => b.priority - a.priority);
 
-    return this.todo[0];
+    return this.todoList[0];
   }
 }
 
